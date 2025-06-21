@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
   pokemons: Pokemon[] = [];
   loading = true;
   error = false;
+  offset = 0;
+  limit = 20;
+  Math = Math; // Para uso no template
 
   constructor(
     private pokemonService: PokemonService,
@@ -30,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.error = false;
     
-    this.pokemonService.getPokemons().subscribe({
+    this.pokemonService.getPokemons(this.offset, this.limit).subscribe({
       next: (pokemons) => {
         this.pokemons = pokemons;
         this.loading = false;
@@ -52,5 +55,21 @@ export class HomeComponent implements OnInit {
     if (target) {
       target.style.display = 'none';
     }
+  }
+
+  goToPreviousPage() {
+    if (this.offset > 0) {
+      this.offset -= this.limit;
+      this.loadPokemons();
+    }
+  }
+
+  goToNextPage() {
+    this.offset += this.limit;
+    this.loadPokemons();
+  }
+
+  isPreviousDisabled(): boolean {
+    return this.offset === 0;
   }
 } 

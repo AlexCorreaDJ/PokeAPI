@@ -65,6 +65,33 @@
     </ion-row>
   </ion-grid>
 
+  <!-- Pagination Controls -->
+  <div *ngIf="!loading && !error" class="pagination-container">
+    <ion-button 
+      (click)="goToPreviousPage()" 
+      [disabled]="isPreviousDisabled()"
+      fill="outline"
+      class="pagination-button"
+    >
+      <ion-icon name="chevron-back" slot="start"></ion-icon>
+      Anterior
+    </ion-button>
+    
+    <div class="page-info">
+      <span>Página {{ Math.floor(offset / limit) + 1 }}</span>
+      <span class="pokemon-count">{{ pokemons.length }} Pokémons</span>
+    </div>
+    
+    <ion-button 
+      (click)="goToNextPage()" 
+      fill="outline"
+      class="pagination-button"
+    >
+      Próximo
+      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+    </ion-button>
+  </div>
+
   <!-- Empty State -->
   <div *ngIf="!loading && !error && pokemons.length === 0" class="empty-container">
     <ion-icon name="search-outline" size="large"></ion-icon>
