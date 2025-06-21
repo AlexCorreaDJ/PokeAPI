@@ -1,59 +1,86 @@
-# POKEAPI
+# 🎮 PokeAPI - Aplicativo de Pokémons
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+Um aplicativo web responsivo desenvolvido com **Ionic + Angular** que consome a **PokeAPI** para exibir informações detalhadas sobre Pokémons, incluindo listagem paginada, detalhes completos e interface adaptável para diferentes dispositivos.
 
-## Development server
+## 🛠️ Tecnologias Utilizadas
 
-To start a local development server, run:
+- **Angular 20** - Framework principal com componentes standalone
+- **Ionic Framework** - UI components e responsividade
+- **TypeScript** - Tipagem estática e melhor DX
+- **SCSS** - Estilos avançados com variáveis CSS
+- **RxJS** - Programação reativa para requisições HTTP
+- **PokeAPI** - API REST para dados dos Pokémons
 
-```bash
-ng serve
+## 🚀 Como Instalar e Rodar
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/AlexCorreaDJ/PokeAPI.git
+   cd PokeAPI
+   ```
+
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
+
+3. **Execute o projeto:**
+   ```bash
+   ng serve --port=8100
+   ```
+
+4. **Acesse:** http://localhost:8100/
+
+## 📱 Como Funciona
+
+### Listagem de Pokémons
+A tela principal exibe uma grade responsiva de Pokémons com nome, ID e sprite, organizada em 2-6 colunas dependendo do tamanho da tela, consumindo dados da PokeAPI através do `PokemonService`.
+
+### Detalhes Completos
+Ao clicar em um Pokémon, você é redirecionado para uma página de detalhes que exibe informações completas como altura, peso, tipos, habilidades, estatísticas e imagens (normal/shiny), organizadas em cards responsivos.
+
+### Paginação Inteligente
+O sistema de paginação permite navegar entre 20 Pokémons por página usando botões "Anterior" e "Próximo", com controle automático de estado (botão anterior desabilitado na primeira página) e informações visuais da página atual.
+
+## ⭐ Funcionalidades de Favoritos
+
+O projeto está preparado para implementação de favoritos com `@ionic/storage-angular` instalado, permitindo salvar Pokémons favoritos localmente no dispositivo do usuário.
+
+## 📐 Boas Práticas Implementadas
+
+### Arquitetura e Serviços
+- **Separação de responsabilidades** com `PokemonService` para lógica de negócio
+- **Injeção de dependência** para HttpClient e Router
+- **Interfaces TypeScript** para tipagem forte dos dados da API
+- **Componentes standalone** para melhor modularidade
+
+### Responsividade e UX
+- **Grid system dinâmico** com breakpoints específicos para mobile, tablet e desktop
+- **Orientação adaptativa** para modo retrato e paisagem
+- **Tipografia escalável** com fontes otimizadas para cada dispositivo
+- **Estados de loading e erro** para melhor experiência do usuário
+
+## 🔧 Estrutura do Projeto
+
+```
+src/app/
+├── pages/
+│   ├── home/           # Listagem principal
+│   └── details/        # Detalhes do Pokémon
+├── services/
+│   └── pokemon.service.ts  # Lógica de API
+├── app.routes.ts       # Configuração de rotas
+└── app.config.ts       # Configuração da aplicação
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 📊 Características Técnicas
 
-## Code scaffolding
+- **SSR/Prerendering** configurado (com limitações para rotas dinâmicas)
+- **Lazy loading** de componentes Ionic
+- **Error handling** robusto para falhas de API
+- **Performance otimizada** com imagens responsivas
+- **Acessibilidade** com alt texts e navegação por teclado
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Desenvolvido com ❤️ usando Ionic + Angular**
