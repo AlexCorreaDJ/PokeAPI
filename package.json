@@ -9,7 +9,7 @@
     "test": "ng test",
     "serve:ssr:POKEAPI": "node dist/POKEAPI/server/server.mjs",
     "ionic:build": "ng build",
-    "ionic:serve": "ng serve"
+    "ionic:serve": "ng serve --"
   },
   "private": true,
   "dependencies": {

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { DetailsComponent } from './pages/details/details.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,6 @@ export const routes: Routes = [
   },
   {
     path: 'details/:id',
-    // TODO: Implementar página de detalhes
-    redirectTo: '/home'
+    component: DetailsComponent
   }
 ];

@@ -1,0 +1,155 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+        Voltar
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Detalhes do Pokémon
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando detalhes do Pokémon...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <ion-icon name="alert-circle-outline" size="large"></ion-icon>
+    <h3>Erro ao carregar detalhes</h3>
+    <p>Não foi possível carregar os detalhes deste Pokémon.</p>
+    <ion-button (click)="loadPokemonDetails()" fill="outline">
+      Tentar Novamente
+    </ion-button>
+  </div>
+
+  <!-- Pokemon Details -->
+  <div *ngIf="!loading && !error && pokemon" class="pokemon-details">
+    <!-- Header Card -->
+    <ion-card class="header-card">
+      <ion-card-header>
+        <ion-card-title class="pokemon-name">
+          {{ pokemon.name | titlecase }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          #{{ pokemon.id.toString().padStart(3, '0') }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content class="images-container">
+        <div class="image-section">
+          <h4>Normal</h4>
+          <img 
+            [src]="pokemon.images.default" 
+            [alt]="pokemon.name + ' (Normal)'"
+            class="pokemon-image"
+            (error)="onImageError($event)"
+          />
+        </div>
+        <div class="image-section">
+          <h4>Shiny</h4>
+          <img 
+            [src]="pokemon.images.shiny" 
+            [alt]="pokemon.name + ' (Shiny)'"
+            class="pokemon-image"
+            (error)="onImageError($event)"
+          />
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Basic Info Card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Informações Básicas</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              <h3>Altura</h3>
+              <p>{{ pokemon.height }} m</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h3>Peso</h3>
+              <p>{{ pokemon.weight }} kg</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h3>Experiência Base</h3>
+              <p>{{ pokemon.baseExperience }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Types Card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Tipos</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="types-container">
+          <ion-chip 
+            *ngFor="let type of pokemon.types" 
+            [color]="getTypeColor(type)"
+            class="type-chip"
+          >
+            {{ type | titlecase }}
+          </ion-chip>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Abilities Card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Habilidades</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let ability of pokemon.abilities">
+            <ion-label>
+              <h3>{{ ability | titlecase }}</h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Stats Card -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Estatísticas</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="stats-container">
+          <div *ngFor="let stat of pokemon.stats" class="stat-item">
+            <div class="stat-header">
+              <span class="stat-name">{{ stat.name }}</span>
+              <span class="stat-value">{{ stat.value }}</span>
+            </div>
+            <ion-progress-bar 
+              [value]="stat.value / 255" 
+              [color]="getStatColor(stat.value)"
+            ></ion-progress-bar>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 
