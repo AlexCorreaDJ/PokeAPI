@@ -30,12 +30,14 @@
   </div>
 
   <!-- Pokemon Grid -->
-  <ion-grid *ngIf="!loading && !error">
+  <ion-grid *ngIf="!loading && !error" class="pokemon-grid">
     <ion-row>
       <ion-col 
         size="6" 
-        size-md="4" 
-        size-lg="3" 
+        size-sm="4"
+        size-md="3" 
+        size-lg="2"
+        size-xl="2"
         *ngFor="let pokemon of pokemons"
       >
         <ion-card 
@@ -72,13 +74,14 @@
       [disabled]="isPreviousDisabled()"
       fill="outline"
       class="pagination-button"
+      size="default"
     >
       <ion-icon name="chevron-back" slot="start"></ion-icon>
-      Anterior
+      <span class="button-text">Anterior</span>
     </ion-button>
     
     <div class="page-info">
-      <span>Página {{ Math.floor(offset / limit) + 1 }}</span>
+      <span class="page-number">Página {{ Math.floor(offset / limit) + 1 }}</span>
       <span class="pokemon-count">{{ pokemons.length }} Pokémons</span>
     </div>
     
@@ -86,8 +89,9 @@
       (click)="goToNextPage()" 
       fill="outline"
       class="pagination-button"
+      size="default"
     >
-      Próximo
+      <span class="button-text">Próximo</span>
       <ion-icon name="chevron-forward" slot="end"></ion-icon>
     </ion-button>
   </div>

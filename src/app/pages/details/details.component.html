@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon name="arrow-back"></ion-icon>
-        Voltar
+        <span class="button-text">Voltar</span>
       </ion-button>
     </ion-buttons>
     <ion-title>
@@ -43,113 +43,148 @@
       </ion-card-header>
       
       <ion-card-content class="images-container">
-        <div class="image-section">
-          <h4>Normal</h4>
-          <img 
-            [src]="pokemon.images.default" 
-            [alt]="pokemon.name + ' (Normal)'"
-            class="pokemon-image"
-            (error)="onImageError($event)"
-          />
-        </div>
-        <div class="image-section">
-          <h4>Shiny</h4>
-          <img 
-            [src]="pokemon.images.shiny" 
-            [alt]="pokemon.name + ' (Shiny)'"
-            class="pokemon-image"
-            (error)="onImageError($event)"
-          />
-        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" size-sm="6" size-md="6">
+              <div class="image-section">
+                <h4>Normal</h4>
+                <img 
+                  [src]="pokemon.images.default" 
+                  [alt]="pokemon.name + ' (Normal)'"
+                  class="pokemon-image"
+                  (error)="onImageError($event)"
+                />
+              </div>
+            </ion-col>
+            <ion-col size="6" size-sm="6" size-md="6">
+              <div class="image-section">
+                <h4>Shiny</h4>
+                <img 
+                  [src]="pokemon.images.shiny" 
+                  [alt]="pokemon.name + ' (Shiny)'"
+                  class="pokemon-image"
+                  (error)="onImageError($event)"
+                />
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
 
-    <!-- Basic Info Card -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Informações Básicas</ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>
-              <h3>Altura</h3>
-              <p>{{ pokemon.height }} m</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <h3>Peso</h3>
-              <p>{{ pokemon.weight }} kg</p>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <h3>Experiência Base</h3>
-              <p>{{ pokemon.baseExperience }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+    <!-- Info Grid -->
+    <ion-grid class="info-grid">
+      <ion-row>
+        <!-- Basic Info Card -->
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Informações Básicas</ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    <h3>Altura</h3>
+                    <p>{{ pokemon.height }} m</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <h3>Peso</h3>
+                    <p>{{ pokemon.weight }} kg</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <h3>Experiência Base</h3>
+                    <p>{{ pokemon.baseExperience }}</p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
-    <!-- Types Card -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Tipos</ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content>
-        <div class="types-container">
-          <ion-chip 
-            *ngFor="let type of pokemon.types" 
-            [color]="getTypeColor(type)"
-            class="type-chip"
-          >
-            {{ type | titlecase }}
-          </ion-chip>
-        </div>
-      </ion-card-content>
-    </ion-card>
+        <!-- Types Card -->
+        <ion-col size="12" size-md="6" size-lg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Tipos</ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <div class="types-container">
+                <ion-chip 
+                  *ngFor="let type of pokemon.types" 
+                  [color]="getTypeColor(type)"
+                  class="type-chip"
+                >
+                  {{ type | titlecase }}
+                </ion-chip>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
-    <!-- Abilities Card -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Habilidades</ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let ability of pokemon.abilities">
-            <ion-label>
-              <h3>{{ ability | titlecase }}</h3>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+        <!-- Abilities Card -->
+        <ion-col size="12" size-md="12" size-lg="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Habilidades</ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let ability of pokemon.abilities">
+                  <ion-label>
+                    <h3>{{ ability | titlecase }}</h3>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
 
-    <!-- Stats Card -->
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Estatísticas</ion-card-title>
-      </ion-card-header>
-      
-      <ion-card-content>
-        <div class="stats-container">
-          <div *ngFor="let stat of pokemon.stats" class="stat-item">
-            <div class="stat-header">
-              <span class="stat-name">{{ stat.name }}</span>
-              <span class="stat-value">{{ stat.value }}</span>
-            </div>
-            <ion-progress-bar 
-              [value]="stat.value / 255" 
-              [color]="getStatColor(stat.value)"
-            ></ion-progress-bar>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
+      <!-- Stats Card - Full Width -->
+      <ion-row>
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Estatísticas</ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <div class="stats-container">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col 
+                      size="12" 
+                      size-sm="6" 
+                      size-md="4" 
+                      size-lg="3" 
+                      *ngFor="let stat of pokemon.stats"
+                    >
+                      <div class="stat-item">
+                        <div class="stat-header">
+                          <span class="stat-name">{{ stat.name }}</span>
+                          <span class="stat-value">{{ stat.value }}</span>
+                        </div>
+                        <ion-progress-bar 
+                          [value]="stat.value / 255" 
+                          [color]="getStatColor(stat.value)"
+                        ></ion-progress-bar>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content> 
