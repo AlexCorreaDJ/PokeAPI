@@ -1,5 +1,7 @@
 {
-  "name": "POKEAPI",
-  "integrations": {},
-  "type": "angular"
+  "name": "pokedex",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
 }

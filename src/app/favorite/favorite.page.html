@@ -1,0 +1,32 @@
+<app-px-ion-header>
+  <ion-title>{{title}}</ion-title>
+</app-px-ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-loading mode="ios" [isOpen]="isLoading" message="Loading..." [duration]="1000" spinner="circles"></ion-loading>
+  <app-px-ion-refresher [eventRefresh]="onPretendEvent.bind(this)"></app-px-ion-refresher>
+  <ion-searchbar mode="ios" animated="true" placeholder="search..." (ionInput)="onSearch($event)"></ion-searchbar>
+  
+    @defer (when !isLoading) {
+      @if (total() > 0) {
+      <ion-list mode="ios">
+        @for (pokemon of data() | filterSearch: keywordSearch() :'name'; track $index; let index = $index) {
+          <app-px-ion-pokemon-list 
+          [urlImage]="`${urlImage}${pokemon.id}${IMAGE_FORMAT.png}`" 
+          [pokemonName]="pokemon.name" 
+          [isAddedFavorite]="pokemon.isAddedFavorite" 
+          [pokemon]="pokemon" 
+          [onRemoveFavorite]="onRemoveFavorite.bind(this)"></app-px-ion-pokemon-list>
+        }
+    </ion-list>
+    }
+    @if(!isLoading && total() === 0) {
+      <ion-text mode="ios" color="white">
+        <p class="ion-padding" style="margin-top: 0; margin-bottom: 0;">{{COPY.NOT_FOUND_FAVORITE}}</p>
+      </ion-text>
+    }
+    } @placeholder {
+    <app-px-ion-skeleton></app-px-ion-skeleton>
+    }
+
+</ion-content>

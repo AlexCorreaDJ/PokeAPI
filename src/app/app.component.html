@@ -1,0 +1,17 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="list" (onKeyPress)="goNavigate('/list')" (click)="goNavigate('/list')">
+        <ion-icon name="list"></ion-icon>
+        Home
+      </ion-tab-button>
+      <ion-tab-button tab="favorite" (onKeyPress)="goNavigate('/favorite')" (click)="goNavigate('/favorite')">
+        <ion-icon name="favorite"></ion-icon>
+        Favorite
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-app>
+
+

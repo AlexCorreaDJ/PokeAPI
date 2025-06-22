@@ -1,19 +1,31 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { DetailsComponent } from './pages/details/details.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/list',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'list',
+    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./home/list/list.page').then((m) => m.ListPage),
+      },
+      {
+        path: ':id',
+        loadComponent: () => import('./home/detail/detail.page').then( m => m.DetailPage),
+      },
+    ]
   },
   {
-    path: 'details/:id',
-    component: DetailsComponent
-  }
+    path: 'favorite',
+    loadComponent: () => import('./favorite/favorite.page').then( m => m.FavoritePage)
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./not-found/not-found.page').then( m => m.NotFoundPage)
+  },
 ];
